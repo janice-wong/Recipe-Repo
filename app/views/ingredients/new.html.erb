@@ -1,5 +1,6 @@
-<h1>New Ingredient</h1>
-
-<%= render 'form', ingredient: @ingredient %>
-
-<%= link_to 'Back', ingredients_path %>
+<%= form_tag "/recipes/#{@recipe.id}/ingredients", method: :post do %>
+  <p>quantity<input type="number" name="quantity"></p>
+  <p>measurement<input type="text" name="measurement"></p>
+  <p>ingredient<input type="text" name="ingredient"></p>
+  <p><input type="submit" value="save"></p>
+<% end %>
