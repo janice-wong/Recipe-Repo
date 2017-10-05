@@ -1,4 +1,4 @@
-class IngredientsController < ApplicationController
+class Api::IngredientsController < ApplicationController
 
   def index
     @recipe = Recipe.find(params[:recipe_id])
