@@ -1,6 +1,4 @@
 class Api::RecipesController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def index
     @recipes = Recipe.all.reverse
     render 'index.json.jbuilder'
@@ -14,15 +12,11 @@ class Api::RecipesController < ApplicationController
     )
   end
 
-  # PATCH/PUT /recipes/1
-  # PATCH/PUT /recipes/1.json
   def update
     respond_to do |format|
       if @recipe.update(recipe_params)
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
-        format.html { render :edit }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
