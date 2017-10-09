@@ -1,6 +1,12 @@
 var Recipe = React.createClass({
   getInitialState() {
-    return { ingredients: [], isEditable: false }
+    return {
+      ingredients: [],
+      isEditable: false,
+      title: this.props.recipe.title,
+      directions: this.props.recipe.directions,
+      owner: this.props.recipe.owner
+    }
   },
 
   componentDidMount() {
@@ -19,9 +25,9 @@ var Recipe = React.createClass({
     if (this.state.isEditable) {
       var recipe = {
         id: this.props.recipe.id,
-        title: this.props.recipe.title,
-        directions: this.props.recipe.directions,
-        owner: this.props.recipe.owner
+        title: this.state.title,
+        directions: this.state.directions,
+        owner: this.state.owner
       };
       this.props.updateRecipe(recipe);
     }
