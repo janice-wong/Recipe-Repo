@@ -12,8 +12,7 @@ var Recipe = React.createClass({
   },
 
   handleAddIngredient(ingredient) {
-    this.state.ingredients.unshift(ingredient);
-    this.setState({ ingredients: this.state.ingredients });
+    this.setState({ ingredients: this.state.ingredients.concat(ingredient) });
   },
 
   editRecipe() {
@@ -33,6 +32,18 @@ var Recipe = React.createClass({
     this.props.deleteRecipe(this.props.recipe.id);
   },
 
+  handleDeleteIngredient(ingredientId) {
+    $.ajax({
+      url: `/api/recipes/${this.props.recipe.id}/ingredients/${ingredientId}`,
+      type: 'DELETE',
+      data: ingredientId,
+      success: () => {
+        var newState = this.state.ingredients.filter((i) => i.id != ingredientId);
+        this.setState({ ingredients: newState });
+      }
+    });
+  },
+
   render() {
     var title = this.state.isEditable ? <input type="text" name="title" defaultValue={this.props.recipe.title} onChange={this.updateInput} /> : this.props.recipe.title;
     var directions = this.state.isEditable ? <input type="text" name="directions" defaultValue={this.props.recipe.directions} onChange={this.updateInput} /> : this.props.recipe.directions;
@@ -46,7 +57,7 @@ var Recipe = React.createClass({
         <button onClick={this.editRecipe}>{this.state.isEditable? 'Submit' : 'Edit'}</button>
         <button onClick={this.deleteRecipe}>Delete</button>
         <h5>Ingredients</h5>
-        <Ingredients ingredients={this.state.ingredients} />
+        <Ingredients ingredients={this.state.ingredients} recipeId={this.props.recipe.id} handleDeleteIngredient={this.handleDeleteIngredient} />
         <NewIngredient recipeId={this.props.recipe.id} handleAddIngredient={this.handleAddIngredient} />
         <hr />
       </div>

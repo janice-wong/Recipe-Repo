@@ -6,11 +6,21 @@ class Api::IngredientsController < ApplicationController
   end
 
   def create
-    Ingredient.create(
+    @ingredient = Ingredient.create(
       quantity: params[:quantity],
       measurement: params[:measurement],
       ingredient: params[:ingredient],
       recipe_id: params[:recipe_id]
     )
+    render 'show.json.jbuilder'
+  end
+
+  def show
+    @ingredient = Ingredient.find(params[:id])
+    render 'show.json.jbuilder'
+  end
+
+  def destroy
+    Ingredient.find(params[:id]).destroy
   end
 end

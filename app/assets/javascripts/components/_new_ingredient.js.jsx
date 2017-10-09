@@ -19,7 +19,7 @@ var NewIngredient = React.createClass({
       url: 'api/recipes/' + this.props.recipeId + '/ingredients',
       type: 'POST',
       data: ingredient,
-      success: () => { this.props.handleAddIngredient(ingredient) }
+      success: (ingredient) => { this.props.handleAddIngredient(ingredient) }
     });
 
     this.state.quantity = '';
