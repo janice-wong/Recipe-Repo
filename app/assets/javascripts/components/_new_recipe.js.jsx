@@ -3,6 +3,10 @@ var NewRecipe = React.createClass({
     return {title: '', directions: '', owner: ''}
   },
 
+  updateInput(e) {
+    this.setState({[e.target.name]: e.target.value});
+  },
+
   onSubmit() {
     var recipe = {
       title: this.state.title,
@@ -14,7 +18,7 @@ var NewRecipe = React.createClass({
       url: '/api/recipes',
       type: 'POST',
       data: recipe,
-      success: () => { this.props.handleSubmit(recipe) }
+      success: (recipe) => { this.props.handleSubmit(recipe) }
     });
 
     this.state.title = '';

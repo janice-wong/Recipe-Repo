@@ -3,11 +3,15 @@ var AllRecipes = React.createClass({
     this.props.updateRecipe(recipe);
   },
 
+  deleteRecipe(recipeId) {
+    this.props.deleteRecipe(recipeId);
+  },
+
   render() {
     var recipes = this.props.recipes.map((recipe) => {
       return (
         <div key={recipe.id}>
-          <Recipe recipe={recipe} updateRecipe={this.updateRecipe}/>
+          <Recipe recipe={recipe} updateRecipe={this.updateRecipe} deleteRecipe={this.deleteRecipe}/>
         </div>
       )
     });

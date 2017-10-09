@@ -25,11 +25,23 @@ var Body = React.createClass({
     });
   },
 
+  deleteRecipe(recipeId) {
+    $.ajax({
+      url: `/api/recipes/${recipeId}`,
+      type: 'DELETE',
+      data: recipeId,
+      success: () => {
+        var newState = this.state.recipes.filter((i) => { return i.id != recipeId });
+        this.setState({ recipes: newState });
+      }
+    });
+  },
+
   render() {
     return (
       <div>
         <NewRecipe handleSubmit={this.handleSubmit} />
-        <AllRecipes recipes={this.state.recipes} updateRecipe={this.updateRecipe}/>
+        <AllRecipes recipes={this.state.recipes} updateRecipe={this.updateRecipe} deleteRecipe={this.deleteRecipe} />
       </div>
     )
   }

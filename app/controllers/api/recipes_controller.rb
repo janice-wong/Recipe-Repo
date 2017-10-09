@@ -5,15 +5,20 @@ class Api::RecipesController < ApplicationController
   end
 
   def create
-    Recipe.create(
+    @recipe = Recipe.create(
       title: params[:title],
       directions: params[:directions],
       owner: params[:owner]
     )
+    render 'show.json.jbuilder'
   end
 
+  # def show
+  #   @recipe = Recipe.find(params[:id])
+  #   render 'show.json.jbuilder'
+  # end
+
   def update
-    p params
     Recipe.find(params[:id]).update(
       title: params[:title],
       directions: params[:directions],
@@ -21,18 +26,7 @@ class Api::RecipesController < ApplicationController
     )
   end
 
-  # DELETE /recipes/1
-  # DELETE /recipes/1.json
   def destroy
-    @recipe.destroy
-    respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    Recipe.find(params[:id]).destroy
   end
-
-  private
-    def recipe_params
-      params.require(:recipe).permit(:title, :directions, :owner)
-    end
 end

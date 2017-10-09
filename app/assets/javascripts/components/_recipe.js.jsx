@@ -1,12 +1,6 @@
 var Recipe = React.createClass({
   getInitialState() {
-    return {
-      ingredients: [],
-      isEditable: false,
-      title: this.props.recipe.title,
-      directions: this.props.recipe.directions,
-      owner: this.props.recipe.owner
-    }
+    return { ingredients: [], isEditable: false }
   },
 
   componentDidMount() {
@@ -26,13 +20,17 @@ var Recipe = React.createClass({
     if (this.state.isEditable) {
       var recipe = {
         id: this.props.recipe.id,
-        title: this.state.title,
-        directions: this.state.directions,
-        owner: this.state.owner
+        title: this.props.recipe.title,
+        directions: this.props.recipe.directions,
+        owner: this.props.recipe.owner
       };
       this.props.updateRecipe(recipe);
     }
     this.setState({isEditable: !this.state.isEditable})
+  },
+
+  deleteRecipe() {
+    this.props.deleteRecipe(this.props.recipe.id);
   },
 
   render() {
@@ -46,6 +44,7 @@ var Recipe = React.createClass({
         <p>Directions: {directions}</p>
         <p>Owner: {owner}</p>
         <button onClick={this.editRecipe}>{this.state.isEditable? 'Submit' : 'Edit'}</button>
+        <button onClick={this.deleteRecipe}>Delete</button>
         <h5>Ingredients</h5>
         <Ingredients ingredients={this.state.ingredients} />
         <NewIngredient recipeId={this.props.recipe.id} handleAddIngredient={this.handleAddIngredient} />
