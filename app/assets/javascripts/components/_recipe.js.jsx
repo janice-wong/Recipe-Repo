@@ -1,25 +1,54 @@
 var Recipe = React.createClass({
   getInitialState() {
-    return { ingredients: [] }
+    return {
+      ingredients: [],
+      isEditable: false,
+      title: this.props.recipe.title,
+      directions: this.props.recipe.directions,
+      owner: this.props.recipe.owner
+    }
   },
 
   componentDidMount() {
-    $.getJSON('api/recipes/' + this.props.recipe.id +  '/ingredients', response => { this.setState({ ingredients: response }) });
+    $.getJSON(`api/recipes/${this.props.recipe.id}/ingredients`, response => { this.setState({ ingredients: response }) });
   },
 
-  show() {
-    console.log(this.state.ingredients);
+  updateInput(e) {
+    this.setState({[e.target.name]: e.target.value});
+  },
+
+  handleAddIngredient(ingredient) {
+    this.state.ingredients.unshift(ingredient);
+    this.setState({ ingredients: this.state.ingredients });
+  },
+
+  editRecipe() {
+    if (this.state.isEditable) {
+      var recipe = {
+        id: this.props.recipe.id,
+        title: this.state.title,
+        directions: this.state.directions,
+        owner: this.state.owner
+      };
+      this.props.updateRecipe(recipe);
+    }
+    this.setState({isEditable: !this.state.isEditable})
   },
 
   render() {
+    var title = this.state.isEditable ? <input type="text" name="title" defaultValue={this.props.recipe.title} onChange={this.updateInput} /> : this.props.recipe.title;
+    var directions = this.state.isEditable ? <input type="text" name="directions" defaultValue={this.props.recipe.directions} onChange={this.updateInput} /> : this.props.recipe.directions;
+    var owner = this.state.isEditable ? <input type="text" name="owner" defaultValue={this.props.recipe.owner} onChange={this.updateInput} /> : this.props.recipe.owner;
+
     return (
       <div>
-        <h3>{this.props.recipe.title}</h3>
-        <p>{this.props.recipe.directions}</p>
-        <p>{this.props.recipe.owner}</p>
-        <button onClick={this.show}>show me</button>
+        <h3>Title: {title}</h3>
+        <p>Directions: {directions}</p>
+        <p>Owner: {owner}</p>
+        <button onClick={this.editRecipe}>{this.state.isEditable? 'Submit' : 'Edit'}</button>
         <h5>Ingredients</h5>
-        <Ingredients />
+        <Ingredients ingredients={this.state.ingredients} />
+        <NewIngredient recipeId={this.props.recipe.id} handleAddIngredient={this.handleAddIngredient} />
         <hr />
       </div>
     )

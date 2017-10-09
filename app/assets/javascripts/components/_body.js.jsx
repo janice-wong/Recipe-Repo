@@ -12,11 +12,24 @@ var Body = React.createClass({
     this.setState({ recipes: this.state.recipes });
   },
 
+  updateRecipe(recipe) {
+    $.ajax({
+      url: `/api/recipes/${recipe.id}`,
+      type: 'PUT',
+      data: recipe,
+      success: () => {
+        var newState = this.state.recipes.filter((i) => { return i.id != recipe.id });
+        newState.push(recipe);
+        this.setState({ recipes: newState });
+      }
+    });
+  },
+
   render() {
     return (
       <div>
         <NewRecipe handleSubmit={this.handleSubmit} />
-        <AllRecipes recipes={this.state.recipes} />
+        <AllRecipes recipes={this.state.recipes} updateRecipe={this.updateRecipe}/>
       </div>
     )
   }

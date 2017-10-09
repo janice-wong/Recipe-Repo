@@ -1,14 +1,6 @@
 var NewRecipe = React.createClass({
   getInitialState() {
-    return {
-      title: '',
-      directions: '',
-      owner: ''
-    }
-  },
-
-  updateInput(e) {
-    this.setState({[e.target.name]: e.target.value});
+    return {title: '', directions: '', owner: ''}
   },
 
   onSubmit() {
@@ -25,9 +17,9 @@ var NewRecipe = React.createClass({
       success: () => { this.props.handleSubmit(recipe) }
     });
 
-    this.state.title = '',
-    this.state.directions = '',
-    this.state.owner = ''
+    this.state.title = '';
+    this.state.directions = '';
+    this.state.owner = '';
   },
 
   render() {

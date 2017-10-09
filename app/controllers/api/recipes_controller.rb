@@ -13,13 +13,12 @@ class Api::RecipesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @recipe.update(recipe_params)
-        format.json { render :show, status: :ok, location: @recipe }
-      else
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
-    end
+    p params
+    Recipe.find(params[:id]).update(
+      title: params[:title],
+      directions: params[:directions],
+      owner: params[:owner]
+    )
   end
 
   # DELETE /recipes/1
