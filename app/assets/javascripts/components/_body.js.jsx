@@ -13,13 +13,15 @@ var Body = React.createClass({
   },
 
   updateRecipe(recipe) {
+    var recipeIndex = this.state.recipes.indexOf($.grep(this.state.recipes, function(e) { return e.id === recipe.id})[0]);
+
     $.ajax({
       url: `/api/recipes/${recipe.id}`,
       type: 'PUT',
       data: recipe,
       success: () => {
         var newState = this.state.recipes.filter((i) => { return i.id != recipe.id });
-        newState.push(recipe);
+        newState.splice(recipeIndex, 0, recipe);
         this.setState({ recipes: newState });
       }
     });
