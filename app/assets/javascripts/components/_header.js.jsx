@@ -2,7 +2,9 @@ var Header = React.createClass({
   render() {
     return (
       <div>
-        <h1>Recipes</h1>
+        <div className="col-md-12">
+          <h1>My Recipes</h1>
+        </div>
       </div>
     )
   }

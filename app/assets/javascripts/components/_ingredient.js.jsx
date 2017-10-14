@@ -42,8 +42,10 @@ var Ingredient = React.createClass({
     return (
       <div>
         {quantity} {measurement} {ingredient}
-        <button onClick={this.editIngredient} className="btn btn-sm btn-primary">{edit}</button>
-        <button onClick={this.deleteIngredient} className="btn btn-sm btn-danger">Delete</button>
+        <div className="btn-toolbar">
+          <button onClick={this.editIngredient} className="btn btn-sm btn-primary">{edit}</button>
+          <button onClick={this.deleteIngredient} className="btn btn-sm btn-danger">Delete</button>
+        </div>
       </div>
     )
   }

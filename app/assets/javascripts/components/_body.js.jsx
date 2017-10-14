@@ -1,6 +1,6 @@
 var Body = React.createClass({
   getInitialState() {
-    return { recipes: [] }
+    return { recipes: [], displayAdd: false }
   },
 
   componentDidMount() {
@@ -34,10 +34,19 @@ var Body = React.createClass({
     });
   },
 
+  toggleAdd() {
+    this.setState({displayAdd: !this.state.displayAdd});
+  },
+
   render() {
+    var addRecipe = this.state.displayAdd ? "Done" : "Add Recipe";
+
     return (
       <div>
-        <NewRecipe handleSubmit={this.handleSubmit} />
+        <div className="col-md-12">
+          <p><button className="btn btn-sm btn-default" onClick={this.toggleAdd}>{addRecipe}</button></p>
+        </div>
+        { this.state.displayAdd ? <NewRecipe handleSubmit={this.handleSubmit} /> : null }
         <AllRecipes recipes={this.state.recipes} updateRecipe={this.updateRecipe} deleteRecipe={this.deleteRecipe} />
       </div>
     )

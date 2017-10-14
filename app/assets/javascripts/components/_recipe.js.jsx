@@ -57,17 +57,21 @@ var Recipe = React.createClass({
     var edit = this.state.isEditable ? "Submit" : "Edit"
 
     return (
-      <div>
-        <h3>Title: {title}</h3>
-        <p>Directions: {directions}</p>
-        <p>Owner: {owner}</p>
-        <button onClick={this.editRecipe} className="btn btn-sm btn-primary">{edit}</button>
-        <button onClick={this.deleteRecipe} className="btn btn-sm btn-danger">Delete</button>
-        <h5>Ingredients</h5>
-        <Ingredients ingredients={this.state.ingredients} recipeId={this.props.recipe.id} handleDeleteIngredient={this.handleDeleteIngredient} />
-        <br />
-        <NewIngredient recipeId={this.props.recipe.id} handleAddIngredient={this.handleAddIngredient} />
-        <hr />
+      <div className="col-md-4">
+        <div className="well">
+          <h3>{title}</h3>
+          <p>By {owner}</p>
+          <p>Directions: {directions}</p>
+          <div className="btn-toolbar">
+            <button onClick={this.editRecipe} className="btn btn-sm btn-primary">{edit}</button>
+            <button onClick={this.deleteRecipe} className="btn btn-sm btn-danger">Delete</button>
+          </div>
+          <h5>Ingredients</h5>
+          <Ingredients ingredients={this.state.ingredients} recipeId={this.props.recipe.id} handleDeleteIngredient={this.handleDeleteIngredient} />
+          <br />
+          <NewIngredient recipeId={this.props.recipe.id} handleAddIngredient={this.handleAddIngredient} />
+          <hr />
+        </div>
       </div>
     )
   }

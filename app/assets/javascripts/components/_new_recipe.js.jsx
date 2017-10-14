@@ -28,7 +28,7 @@ var NewRecipe = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className="col-md-12">
         <p>title: <input name="title" value={this.state.title} onChange={this.updateInput}/></p>
         <p>directions: <input name="directions" value={this.state.directions} onChange={this.updateInput}/></p>
         <p>owner: <input name="owner" value={this.state.owner} onChange={this.updateInput}/></p>
