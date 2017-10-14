@@ -37,12 +37,13 @@ var Ingredient = React.createClass({
     var quantity = this.state.isEditable ? <input type="text" name="quantity" onChange={this.updateInput} defaultValue={this.state.quantity} /> : this.state.quantity;
     var measurement = this.state.isEditable ? <input type="text" name="measurement" onChange={this.updateInput} defaultValue={this.state.measurement} /> : this.state.measurement;
     var ingredient = this.state.isEditable ? <input type="text" name="ingredient" onChange={this.updateInput} defaultValue={this.state.ingredient} /> : this.state.ingredient;
+    var edit = this.state.isEditable ? "Submit" : "Edit"
 
     return (
       <div>
         {quantity} {measurement} {ingredient}
-        <button onClick={this.editIngredient}>Edit</button>
-        <button onClick={this.deleteIngredient}>Delete</button>
+        <button onClick={this.editIngredient} className="btn btn-sm btn-primary">{edit}</button>
+        <button onClick={this.deleteIngredient} className="btn btn-sm btn-danger">Delete</button>
       </div>
     )
   }

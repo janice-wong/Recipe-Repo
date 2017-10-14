@@ -32,7 +32,7 @@ var NewRecipe = React.createClass({
         <p>title: <input name="title" value={this.state.title} onChange={this.updateInput}/></p>
         <p>directions: <input name="directions" value={this.state.directions} onChange={this.updateInput}/></p>
         <p>owner: <input name="owner" value={this.state.owner} onChange={this.updateInput}/></p>
-        <p><button onClick={this.onSubmit}>Submit</button></p>
+        <p><button onClick={this.onSubmit} className="btn btn-sm btn-success">Submit</button></p>
       </div>
     )
   }

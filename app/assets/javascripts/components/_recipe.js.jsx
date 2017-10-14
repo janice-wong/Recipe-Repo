@@ -54,16 +54,18 @@ var Recipe = React.createClass({
     var title = this.state.isEditable ? <input type="text" name="title" defaultValue={this.state.title} onChange={this.updateInput} /> : this.state.title;
     var directions = this.state.isEditable ? <input type="text" name="directions" defaultValue={this.state.directions} onChange={this.updateInput} /> : this.state.directions;
     var owner = this.state.isEditable ? <input type="text" name="owner" defaultValue={this.state.owner} onChange={this.updateInput} /> : this.state.owner;
+    var edit = this.state.isEditable ? "Submit" : "Edit"
 
     return (
       <div>
         <h3>Title: {title}</h3>
         <p>Directions: {directions}</p>
         <p>Owner: {owner}</p>
-        <button onClick={this.editRecipe}>{this.state.isEditable? 'Submit' : 'Edit'}</button>
-        <button onClick={this.deleteRecipe}>Delete</button>
+        <button onClick={this.editRecipe} className="btn btn-sm btn-primary">{edit}</button>
+        <button onClick={this.deleteRecipe} className="btn btn-sm btn-danger">Delete</button>
         <h5>Ingredients</h5>
         <Ingredients ingredients={this.state.ingredients} recipeId={this.props.recipe.id} handleDeleteIngredient={this.handleDeleteIngredient} />
+        <br />
         <NewIngredient recipeId={this.props.recipe.id} handleAddIngredient={this.handleAddIngredient} />
         <hr />
       </div>

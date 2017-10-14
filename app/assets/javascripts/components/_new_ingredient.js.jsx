@@ -33,7 +33,7 @@ var NewIngredient = React.createClass({
         <p>quantity: <input type="number" name="quantity" value={this.state.quantity} onChange={this.updateInput}/></p>
         <p>measurement: <input type="text" name="measurement" value={this.state.measurement} onChange={this.updateInput}/></p>
         <p>ingredient: <input type="text" name="ingredient" value={this.state.ingredient} onChange={this.updateInput}/></p>
-        <p><button onClick={this.onAddIngredient}>Submit</button></p>
+        <p><button onClick={this.onAddIngredient} className="btn btn-sm btn-success">Submit</button></p>
       </div>
     )
   }
