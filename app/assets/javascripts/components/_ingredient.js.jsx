@@ -1,13 +1,48 @@
 var Ingredient = React.createClass({
+  getInitialState() {
+    return {
+      isEditable: false,
+      quantity: this.props.ingredient.quantity,
+      measurement: this.props.ingredient.measurement,
+      ingredient: this.props.ingredient.ingredient
+    }
+  },
+
+  updateInput(e) {
+    this.setState({[e.target.name]: e.target.value});
+  },
+
   deleteIngredient(ingredientId) {
     this.props.deleteIngredient(this.props.ingredient.id);
   },
 
+  editIngredient(ingredientId) {
+    if (this.state.isEditable) {
+      var ingredient = {
+        id: this.props.ingredient.id,
+        quantity: this.state.quantity,
+        measurement: this.state.measurement,
+        ingredient: this.state.ingredient
+      }
+      $.ajax({
+        url: `/api/recipes/${this.props.ingredient.id}/ingredients/${this.props.ingredient.id}`,
+        type: 'PUT',
+        data: ingredient
+      });
+    }
+    this.setState({isEditable: !this.state.isEditable});
+  },
+
   render() {
+    var quantity = this.state.isEditable ? <input type="text" name="quantity" onChange={this.updateInput} defaultValue={this.state.quantity} /> : this.state.quantity;
+    var measurement = this.state.isEditable ? <input type="text" name="measurement" onChange={this.updateInput} defaultValue={this.state.measurement} /> : this.state.measurement;
+    var ingredient = this.state.isEditable ? <input type="text" name="ingredient" onChange={this.updateInput} defaultValue={this.state.ingredient} /> : this.state.ingredient;
+
     return (
       <div>
-        {this.props.ingredient.quantity} {this.props.ingredient.measurement} {this.props.ingredient.ingredient}
-        <button onClick={this.deleteIngredient}>Delete Ingredient</button>
+        {quantity} {measurement} {ingredient}
+        <button onClick={this.editIngredient}>Edit</button>
+        <button onClick={this.deleteIngredient}>Delete</button>
       </div>
     )
   }

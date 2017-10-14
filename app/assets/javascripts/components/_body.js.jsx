@@ -18,12 +18,7 @@ var Body = React.createClass({
     $.ajax({
       url: `/api/recipes/${recipe.id}`,
       type: 'PUT',
-      data: recipe,
-      success: () => {
-        var newState = this.state.recipes.filter((i) => { return i.id != recipe.id });
-        newState.splice(recipeIndex, 0, recipe);
-        this.setState({ recipes: newState });
-      }
+      data: recipe
     });
   },
 

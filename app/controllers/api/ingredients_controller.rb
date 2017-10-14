@@ -15,9 +15,17 @@ class Api::IngredientsController < ApplicationController
     render 'show.json.jbuilder'
   end
 
-  def show
-    @ingredient = Ingredient.find(params[:id])
-    render 'show.json.jbuilder'
+  # def show
+  #   @ingredient = Ingredient.find(params[:id])
+  #   render 'show.json.jbuilder'
+  # end
+
+  def update
+    Ingredient.find(params[:id]).update(
+      quantity: params[:quantity],
+      measurement: params[:measurement],
+      ingredient: params[:ingredient]
+    )
   end
 
   def destroy

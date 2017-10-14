@@ -51,9 +51,9 @@ var Recipe = React.createClass({
   },
 
   render() {
-    var title = this.state.isEditable ? <input type="text" name="title" defaultValue={this.props.recipe.title} onChange={this.updateInput} /> : this.props.recipe.title;
-    var directions = this.state.isEditable ? <input type="text" name="directions" defaultValue={this.props.recipe.directions} onChange={this.updateInput} /> : this.props.recipe.directions;
-    var owner = this.state.isEditable ? <input type="text" name="owner" defaultValue={this.props.recipe.owner} onChange={this.updateInput} /> : this.props.recipe.owner;
+    var title = this.state.isEditable ? <input type="text" name="title" defaultValue={this.state.title} onChange={this.updateInput} /> : this.state.title;
+    var directions = this.state.isEditable ? <input type="text" name="directions" defaultValue={this.state.directions} onChange={this.updateInput} /> : this.state.directions;
+    var owner = this.state.isEditable ? <input type="text" name="owner" defaultValue={this.state.owner} onChange={this.updateInput} /> : this.state.owner;
 
     return (
       <div>
