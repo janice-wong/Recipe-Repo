@@ -48,8 +48,8 @@ var Body = React.createClass({
         </div>
         <React.addons.CSSTransitionGroup
           transitionName="example"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
+          transitionEnterTimeout={100}
+          transitionLeaveTimeout={100}>
           { this.state.displayAdd ? <NewRecipe handleSubmit={this.handleSubmit} /> : null }
         </React.addons.CSSTransitionGroup>
         <AllRecipes recipes={this.state.recipes} updateRecipe={this.updateRecipe} deleteRecipe={this.deleteRecipe} />
