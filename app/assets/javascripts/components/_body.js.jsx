@@ -46,7 +46,12 @@ var Body = React.createClass({
         <div className="col-md-12">
           <p><button className="btn btn-sm btn-default" onClick={this.toggleAdd}>{addRecipe}</button></p>
         </div>
-        { this.state.displayAdd ? <NewRecipe handleSubmit={this.handleSubmit} /> : null }
+        <React.addons.CSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
+          { this.state.displayAdd ? <NewRecipe handleSubmit={this.handleSubmit} /> : null }
+        </React.addons.CSSTransitionGroup>
         <AllRecipes recipes={this.state.recipes} updateRecipe={this.updateRecipe} deleteRecipe={this.deleteRecipe} />
       </div>
     )

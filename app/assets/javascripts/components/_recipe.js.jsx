@@ -61,7 +61,7 @@ var Recipe = React.createClass({
         <div className="well">
           <h3>{title}</h3>
           <p>By {owner}</p>
-          <p>Directions: {directions}</p>
+          <p><i>{directions}</i></p>
           <div className="btn-toolbar">
             <button onClick={this.editRecipe} className="btn btn-sm btn-primary">{edit}</button>
             <button onClick={this.deleteRecipe} className="btn btn-sm btn-danger">Delete</button>
