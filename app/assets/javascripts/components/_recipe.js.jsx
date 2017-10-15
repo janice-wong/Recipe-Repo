@@ -59,18 +59,23 @@ var Recipe = React.createClass({
     return (
       <div className="col-md-4">
         <div className="well">
-          <h3>{title}</h3>
-          <p>By {owner}</p>
-          <p><i>{directions}</i></p>
-          <div className="btn-toolbar">
-            <button onClick={this.editRecipe} className="btn btn-sm btn-primary">{edit}</button>
-            <button onClick={this.deleteRecipe} className="btn btn-sm btn-danger">Delete</button>
+          <div className="container">
+            <h3 className="inlineLeft">{title}</h3>
+            <div className="inlineRight">
+              <div className="btn-toolbar">
+              <button onClick={this.editRecipe} className="btn btn-sm btn-primary right-align">{edit}</button>
+              <button onClick={this.deleteRecipe} className="btn btn-sm btn-danger right-align">Delete</button>
+            </div>
+            </div>
+            <br />
+            <br />
+            <p>By {owner}</p>
+            <p><i>{directions}</i></p>
+            <h5>Ingredients</h5>
+            <Ingredients ingredients={this.state.ingredients} recipeId={this.props.recipe.id} handleDeleteIngredient={this.handleDeleteIngredient} />
+            <br />
+            <NewIngredient recipeId={this.props.recipe.id} handleAddIngredient={this.handleAddIngredient} />
           </div>
-          <h5>Ingredients</h5>
-          <Ingredients ingredients={this.state.ingredients} recipeId={this.props.recipe.id} handleDeleteIngredient={this.handleDeleteIngredient} />
-          <br />
-          <NewIngredient recipeId={this.props.recipe.id} handleAddIngredient={this.handleAddIngredient} />
-          <hr />
         </div>
       </div>
     )

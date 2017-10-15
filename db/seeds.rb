@@ -12,7 +12,6 @@ Ingredient.all.destroy_all
     Ingredient.create(
       recipe: recipe,
       quantity: rand(1..6),
-      measurement: Faker::Food.measurement,
       ingredient: Faker::Food.ingredient
     )
   end

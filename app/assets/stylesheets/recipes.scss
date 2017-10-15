@@ -19,3 +19,23 @@
 .directions {
   width: 100%;
 }
+
+h3 {
+  display: inline-block;
+  margin: 0;
+}
+
+.container {
+    position:relative;
+    width: 100%;
+    // border: 1px solid blue;
+}
+
+.inlineLeft, .inlineRight {
+    position:absolute;
+    display: inline;
+}
+
+.inlineRight {
+    right:0;
+}
